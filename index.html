@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alfa Root | ইসলামের যোদ্ধা</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+    body {
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+      perspective: 2000px;
+    }
+    /* Parallax Background */
+    .parallax {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+    .parallax-layer {
+      position: absolute;
+      width: 200%; height: 200%;
+      top: -50%; left: -50%;
+      background: radial-gradient(circle, rgba(0,240,255,0.2), transparent 70%),
+                  radial-gradient(circle, rgba(255,0,240,0.15), transparent 70%);
+      mix-blend-mode: screen;
+      animation: floatLayer 60s linear infinite;
+    }
+    @keyframes floatLayer {
+      from { transform: rotate(0deg) scale(1); }
+      to { transform: rotate(360deg) scale(1.2); }
+    }
+
+    /* Header */
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transform-style: preserve-3d;
+    }
+    .profile-pic {
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 5px solid #00f0ff;
+      box-shadow: 0 0 40px #00f0ff;
+      animation: zoomIn 2s ease forwards;
+      transform: translateZ(50px);
+    }
+    .profile-pic img { width: 100%; height: 100%; object-fit: cover; }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-top: 20px;
+      opacity: 0; transform: scale(0.8) translateZ(60px);
+      animation: fadeZoomIn 2s ease forwards 1s;
+      text-shadow: 0 0 20px #ff00f0, 0 0 40px #00f0ff;
+    }
+    h2 {
+      font-size: 1.8rem; margin-top: 10px;
+      opacity: 0; transform: translateY(30px) translateZ(40px);
+      animation: fadeInUp 2s ease forwards 2s;
+      color: #00f0ff;
+      text-shadow: 0 0 10px #00f0ff;
+    }
+    h3 {
+      font-size: 1.4rem; margin-top: 10px;
+      opacity: 0; transform: translateY(30px) translateZ(30px);
+      animation: fadeInUp 2s ease forwards 3s;
+      color: #ff00f0;
+      text-shadow: 0 0 10px #ff00f0;
+    }
+    .glow-line {
+      margin: 30px auto;
+      width: 0; height: 3px;
+      background: linear-gradient(90deg, #00f0ff, #ff00f0);
+      animation: lineExpand 2s ease forwards 4s;
+      border-radius: 5px;
+    }
+
+    /* Scroll Sections */
+    section {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; text-align: center;
+      padding: 50px;
+      opacity: 0; transform: translateY(50px);
+      transition: all 1.5s ease;
+    }
+    section.visible { opacity: 1; transform: translateY(0); }
+    section:nth-child(odd) { background: rgba(0,240,255,0.05); }
+    section:nth-child(even) { background: rgba(255,0,240,0.05); }
+
+    /* Animations */
+    @keyframes zoomIn {
+      from { transform: scale(0) rotateY(180deg); opacity: 0; }
+      to { transform: scale(1) rotateY(0); opacity: 1; }
+    }
+    @keyframes fadeZoomIn {
+      to { opacity: 1; transform: scale(1) translateZ(60px); }
+    }
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0) translateZ(40px); }
+    }
+    @keyframes lineExpand {
+      from { width: 0; opacity: 0; }
+      to { width: 80%; opacity: 1; }
+    }
+
+    /* Floating glowing particles */
+    .particle {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, #fff, transparent);
+      opacity: 0.7; animation: float 15s linear infinite;
+    }
+    @keyframes float {
+      from { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      50% { opacity: 1; }
+      to { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Parallax Background -->
+  <div class="parallax">
+    <div class="parallax-layer"></div>
+  </div>
+
+  <!-- Floating Particles -->
+  <script>
+    for(let i=0;i<50;i++){
+      let p=document.createElement("div");
+      p.className="particle";
+      let size=Math.random()*6+2;
+      p.style.width=size+"px";
+      p.style.height=size+"px";
+      p.style.left=Math.random()*100+"vw";
+      p.style.animationDuration=(Math.random()*10+10)+"s";
+      p.style.animationDelay=Math.random()*10+"s";
+      document.body.appendChild(p);
+    }
+  </script>
+
+  <header>
+    <div class="profile-pic">
+      <img src="https://i.postimg.cc/YSbWv9GB/IMG-20250914-144706-679.jpg" alt="Profile">
+    </div>
+    <h1>Alfa Root</h1>
+    <h2>Anonymous Cyber Shield (ACS)</h2>
+    <h3>CEO - Jam Virus</h3>
+    <div class="glow-line"></div>
+  </header>
+
+
+  <script>
+    // Scroll Animation Observer
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.3 });
+    sections.forEach(sec=>observer.observe(sec));
+
+    // Parallax Mouse Effect
+    document.addEventListener("mousemove", e=>{
+      const x=(e.clientX/window.innerWidth-0.5)*30;
+      const y=(e.clientY/window.innerHeight-0.5)*30;
+      document.querySelector(".parallax-layer").style.transform=`translate(${x}px,${y}px) scale(1.2) rotate(360deg)`;
+    });
+  </script>
+</body>
+</html>
